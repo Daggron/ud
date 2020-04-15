@@ -1,40 +1,42 @@
-import React, {Component} from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import { Card,Image,Label} from 'semantic-ui-react'
 import { Redirect } from 'react-router-dom';
+import style from './LeaderBoard.module.css';
 
 class LeaderBoard extends Component {
     render() {
         const {usersDetails,authedUser} = this.props;
         if(!authedUser) return <Redirect to="/login" />
+
         return(
-            <div className='leaderboard-list-container'>
+            <div className={style.container}>
                 { usersDetails.map((user) => (
                     <li key={user.name} >
-                    <div className='leaderboard-card-container'>
-                        <Card fluid raised style={{height:'140px'}}>
-                            <Card.Content className='leaderboard-card-content'>
-                            <div style={{display:'flex',height:'110px',width:'20%',justifyContent:'center',alignItems:'center'}}>
+                    <div className={style.card}>
+                        <Card fluid raised style={{padding: 10}}>
+                            <Card.Content className={style.cardContent}>
+                            <div>
                                 <Image src={user.avatarURL} size ='tiny' circular verticalAlign='middle' spaced='left'/>
                             </div>
                             <div style={{width:'60%',height:'110px'}}>
-                                <div className='divider-leaderboard-left'></div>
-                                <Card.Content style={{display:'flex',flexDirection:'column',paddingLeft:25,paddingRight:30}}>
-                                    <Card.Header className='ui header' style={{fontSize:25}}>{user.name}</Card.Header>
-                                    <div style={{display:'flex',flexDirection:'row',paddingTop:'10px'}}>
-                                        <p style={{textAlign:'left',flex:'90%'}}>Answered questions</p>
-                                        <p style={{textAlign:'right',flex:'10%'}}>{user.questionsAnswered}</p>
+                                <div className={style.dividerLeft} />
+                                <div style={{display:'flex',flexDirection:'column',paddingLeft:25,paddingRight:30}}>
+                                    <Card.Header className='ui header' style={{fontSize:25,color:'hotpink'}}>{user.name}</Card.Header>
+                                    <div className={style.body}>
+                                        <p>Answered questions</p>
+                                        <p>{user.questionsAnswered}</p>
                                     </div>
-                                    <div style={{display:'flex',flexDirection:'row',paddingTop:'5px'}}>
-                                        <p style={{textAlign:'left',flex:'90%'}}>Created questions</p>
-                                        <p style={{textAlign:'right',flex:'10%'}}>{user.createdQuestions}</p>
+                                    <div className={style.body}>
+                                        <p>Created questions</p>
+                                        <p>{user.createdQuestions}</p>
                                     </div>
-                                </Card.Content>
-                                <div className='divider-leaderboard-right'></div>
+                                </div>
+                                <div className={style.dividerRight} />
                             </div>
                             <div style={{width:'20%'}}>
                                 <Card centered style={{height:'110px'}}>
-                                    <Card.Header className='ui header' textAlign='center' style={{height:30,marginTop:8}}>Score</Card.Header>
+                                    <Card.Header style={{textAlign:'center',fontSize:20,height:30,marginTop:5}}>Score</Card.Header>
                                     <Card.Content style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                                         <Label circular color='pink' size='huge'>{user.rank}</Label>
                                     </Card.Content>

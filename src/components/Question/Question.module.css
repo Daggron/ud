@@ -1,0 +1,27 @@
+.info{
+    display:flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: center;
+    align-items: left;
+    position: absolute;
+    top:25%;
+    height: 110px;
+    margin-top: 10px;
+    left: 35%;
+    width: 62%;
+}
+.center{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
+
+.divider{
+    left: 30%;
+    border-right: 1px solid #d4d4d5;
+    height: 90px;
+    position: absolute;
+    top:33%;
+}

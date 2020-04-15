@@ -1,0 +1,26 @@
+.container {
+    width: 400px;
+    margin: auto;
+    margin-top:3%;
+}
+.unanswered{
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+  
+.cardContent{
+    display: flex;
+    flex-direction:row;
+}
+
+.pac{
+    display: flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+}
+
+.puac{
+    display: flex;
+  flex-direction:row;
+}

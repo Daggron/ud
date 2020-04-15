@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Card, Input, Button } from 'semantic-ui-react'
-import { handleAddQuestion } from '../redux/actions/questions';
+import { handleAddQuestion } from '../../redux/actions/questions';
 import { Redirect } from 'react-router-dom';
+import style from './NewQuestion.module.css';
 
 class NewQuestion extends Component {
     state = {
@@ -21,14 +22,14 @@ class NewQuestion extends Component {
         history.push('/');
     };
 
-    handleInputOneChange = (e, data) => {
+    handleInputOne = (e, data) => {
         e.preventDefault()
         this.setState({
             optionOneText:data.value
         })
     };
 
-    handleInputTwoChange = (e, data) => {
+    handleInputTwo = (e, data) => {
         e.preventDefault()
         this.setState({
             optionTwoText:data.value
@@ -41,17 +42,16 @@ class NewQuestion extends Component {
             <Redirect to="/login" />
         )
         return(
-            <div className='add-new-question-form'>
+            <div className={style.form}>
                 <Card fluid>
-                    <Card.Header  textAlign='center' style={{ marginTop:7.5, marginBottom:0,height:40, fontSize:25}} className='ui header'>Add A New Question</Card.Header>
+                    <Card.Header textAlign='center' style={{ marginTop:7.5, marginBottom:0,height:40, fontSize:25}} className='ui header'>Add A New Question</Card.Header>
                     <Card.Content>
-                        <Card.Description ></Card.Description>
                         <Card.Header  style={{marginTop:'20px', marginBottom:'10px'}}>Would you rather ...</Card.Header>
-                        <Input fluid placeholder='Enter Option One Text Here' style={{marginTop:'20px'}}  onChange={this.handleInputOneChange}></Input>
+                        <Input fluid placeholder='Enter Option One Here' style={{marginTop:'20px'}}  onChange={this.handleInputOne} />
                         <h3 style={{textAlign:'center'}}>
                             OR
                         </h3>
-                        <Input fluid placeholder='Enter Option Two Text Here' onChange={this.handleInputTwoChange}></Input>
+                        <Input fluid placeholder='Enter Option Two Here' onChange={this.handleInputTwo} />
                         <Button fluid color='pink' style={{ justifyContent:'center',marginTop:'20px', marginBottom:'10px'}} onClick={this.handleSubmit}>Submit</Button>
                     </Card.Content>
                 </Card>

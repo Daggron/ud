@@ -3,7 +3,8 @@ import { Card, Image, Checkbox, Button, Progress,Label,Message} from 'semantic-u
 import { connect } from 'react-redux'
 import { handleAddAnswer } from '../redux/actions/questions';
 import { withRouter, Redirect } from 'react-router-dom'
-import Error404 from './Error404'
+import Error404 from './Error/Error404';
+import style from './Poll.module.css';
 
 class Poll extends Component {
     state = {
@@ -55,13 +56,13 @@ class Poll extends Component {
         return(
             <div>
             { hasQuestionNotAnswered ?
-            (<div className='poll-container'>
-            <div className='poll-unanswered-card-container'>
+            (<div className={style.container}>
+            <div className={style.unanswered}>
                 <Card fluid raised style={{height:'230px'}}>
                     <div style={{display:'flex',background:'#f1f1f1',height:40,alignItems:'center'}}>
                         <Card.Header textAlign='left' className='ui header' style={{ fontSize:17,marginLeft:'15px'}}>{userName} Asks:</Card.Header>
                     </div>
-                    <Card.Content className='poll-unanswered-card-content'>
+                    <Card.Content className={style.puac}>
                         <div style={{display:'flex',height:'160px',width:'35%',justifyContent:'center',alignItems:'center'}}>
                             <Image src = {authorAvatar} size ='small' circular verticalAlign='middle' spaced='right'/>
                         </div>
@@ -80,13 +81,13 @@ class Poll extends Component {
             </div>
             </div>)
 
-            : (<div className='poll-container'>
-                <div className='poll-answered-card-container'>
+            : (<div className={style.container}>
+                <div className={style.pac}>
                     <Card fluid raised style={{height:'340px'}}>
                         <div style={{display:'flex',background:'#f1f1f1',height:40,alignItems:'center'}}>
                             <Card.Header textAlign='left' className='ui header' style={{ fontSize:17,marginLeft:'15px'}}>Asked by {userName}</Card.Header>
                         </div>
-                        <Card.Content className='poll-answered-card-content'>
+                        <Card.Content className={style.cardContent}>
                             <div style={{display:'flex',height:'265px',width:'35%',justifyContent:'center',alignItems:'center'}}>
                                 <Image src = {authorAvatar} size ='medium' circular verticalAlign='middle' spaced='right'/>
                             </div>

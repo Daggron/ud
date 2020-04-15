@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import { Tab } from 'semantic-ui-react'
-import Question from './Question'
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import UnansweredQuestion from './UnansweredQuestion';
+import AnsweredQuestion from './AnsweredQuestion';
 
 class Home extends Component {
 
@@ -18,30 +19,16 @@ class Home extends Component {
         const panes = [
             {
                 menuItem: 'Unanswered Questions',
-                render: () =>
-                    <Tab.Pane attached='bottom'>
-                            { unansweredQuestions.map((id) => (
-                                <li key={id} >
-                                    <Question id={id}/>
-                                </li>
-                            ))}
-                    </Tab.Pane>
+                render: () => <Tab.Pane attached='bottom'> <UnansweredQuestion unansweredQuestions={unansweredQuestions} /> </Tab.Pane>
             },
             {
                 menuItem: 'Answered Questions',
-                render: () =>
-                    <Tab.Pane attached='bottom'>
-                            { answeredQuestions.map((id) => (
-                                <li key={id} >
-                                    <Question id={id}/>
-                                </li>
-                            ))}
-                    </Tab.Pane>
+                render: () => <Tab.Pane attached='bottom'> <AnsweredQuestion answeredQuestions={answeredQuestions} /> </Tab.Pane>
             }
           ]
 
         return(
-            <div className='dashboard-questions-container'>
+            <div className='container'>
                 <Tab menu={{ widths: 2, color:'pink', attached: true, tabular: false }} panes={panes}/>
             </div>
         )
@@ -49,26 +36,34 @@ class Home extends Component {
 }
 
 function mapStateToProps({authedUser,questions}) {
-    const unansweredQuestions = Object.keys(questions)
-        .filter((i) => (
-            !questions[i].optionOne.votes.includes(authedUser) &&
-            !questions[i].optionTwo.votes.includes(authedUser)
+    const unansweredQuestions = Object.entries(questions)
+        .filter(([id , eachQuestion]) => (
+            !eachQuestion.optionOne.votes.includes(authedUser) &&
+            !eachQuestion.optionTwo.votes.includes(authedUser)
         ))
-        .sort((a,b) => (
-            questions[b].timestamp - questions[a].timestamp
+        .sort((a,b)=>{
+            return b[1].timestamp - a[1].timestamp
+        })
+        const answeredQuestions = Object.entries(questions)
+        .filter(([id , eachQuestion]) => (
+            eachQuestion.optionOne.votes.includes(authedUser) ||
+            eachQuestion.optionTwo.votes.includes(authedUser)
         ))
-        const answeredQuestions = Object.keys(questions)
-        .filter((i) => (
-            questions[i].optionOne.votes.includes(authedUser) ||
-            questions[i].optionTwo.votes.includes(authedUser)
-        ))
-        .sort((a,b) => (
-            questions[b].timestamp - questions[a].timestamp
-        ))
+        .sort((a,b)=>{
+            return b[1].timestamp - a[1].timestamp
+        })
+
+        const aQ = answeredQuestions.map(eachQuestion=>{
+            return eachQuestion[0];
+        });
+
+        const uAQ = unansweredQuestions.map(eachQuestion=>{
+            return eachQuestion[0];
+        })
     return {
         authedUser,
-        unansweredQuestions,
-        answeredQuestions,
+        unansweredQuestions:uAQ,
+        answeredQuestions:aQ,
     }
 }
 export default connect (mapStateToProps)(Home)

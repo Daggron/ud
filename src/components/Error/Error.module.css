@@ -1,0 +1,17 @@
+.errorPage{
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.5;
+}
+
+.danger{
+    color: red;
+}
+
+.normal{
+    color: #1b1b1d;
+}

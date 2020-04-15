@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Login from './components/Login'
+import Login from './components/Login/Login'
 import Home from './components/Home'
-import NewQuestion from './components/NewQuestion'
-import LeaderBoard from './components/LeaderBoard'
+import NewQuestion from './components/NewQuestion/NewQuestion'
+import LeaderBoard from './components/LeaderBoard/LeaderBoard'
 import Poll from './components/Poll'
-import Error404 from './components/Error404'
+import Error404 from './components/Error/Error404'
 import { connect } from 'react-redux'
-import { handleInitialData } from './redux/actions/shared';
+import { fetchInitialData } from './redux/actions/shared';
 import Loading from './components/Loading/Loading';
 import './App.css';
 
@@ -16,7 +16,7 @@ class App extends Component {
   componentDidMount() {
     const { dispatch, loading } = this.props
     if(loading === true) {
-      dispatch(handleInitialData())
+      dispatch(fetchInitialData())
    }
   }
   render() {
@@ -44,11 +44,11 @@ class App extends Component {
 
 function mapStateToProps({users}) {
   return {
-    loading: isEmpty(users)
+    loading: isLoading(users)
   }
 }
 
-function isEmpty(obj) {
+function isLoading(obj) {
   for(var key in obj) {
       if(obj.hasOwnProperty(key))
           return false

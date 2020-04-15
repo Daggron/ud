@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 import { Card, Image, Divider, Dropdown, Button } from 'semantic-ui-react'
-import { setAuthedUser } from '../redux/actions/authedUser';
+import { setAuthedUser } from '../../redux/actions/authedUser';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import Logo from './logo.jpeg';
+import Logo from '../logo.jpeg';
+import style from './Login.module.css';
 
 class Login extends Component {
     state = {
         userId:  null
     }
-    static defaultProps = {
-        authUser: null,
-        location: null,
-      }
 
     handleDropdownSelection = (e, data) => {
         e.preventDefault()
         const id = data.value
-        this.setState(() => ({
+        this.setState({
             userId: id
-        }))
+        })
     }
     handleLogin = (e) => {
         e.preventDefault()
@@ -27,25 +24,22 @@ class Login extends Component {
         if(this.state.userId !== null) {
             dispatch(setAuthedUser(this.state.userId))
         }
-        else {
-            // Todo
-        }
     }
 
     render() {
         const { authedUser,location } = this.props
         const { from } = location.state || { from: { pathname: '/' }}
-        if(authedUser !== null) {
+        if(authedUser) {
             return (
                 <Redirect to={from} />
             )
         }
         return(
-        <div className='login-container' style={{textAlign: 'center'}}>
-            <div className='login-card-container'>
+        <div className={style.container}>
+            <div className={style.card}>
             <Card fluid raised style={{height:'300px'}}>
-                <div style={{height:'50px',justifyContent:'center',alignContent:'center',textAlign:'center',background:"#f1f1f1"}}>
-                    <Card.Content style={{display:'flex',flexDirection:'column'}}>
+                <div style={{height:'50px',textAlign:'center',background:"#f1f1f1"}}>
+                    <Card.Content>
                         <Card.Header style={{flex:'70%',marginTop:2}} className='ui header' textAlign='center'>Please Sign in to play!</Card.Header>
                     </Card.Content>
                 </div>
@@ -53,16 +47,16 @@ class Login extends Component {
                     <Divider fitted/>
                 </div>
                 <div>
-                    <Image src ={ Logo } size='small' centered />
+                    <Image src ={ Logo } size='small' centered style={{marginTop:10}} />
                 </div>
                 <div>
-                    <p style={{color:"hotpink", fontSize:'18px', fontWeight:'bold'}}>Sign In</p>
+                    <p style={{color:"hotpink", fontSize:'18px', fontWeight:'bold'}}>Sign In to continue</p>
                 </div>
                 <div>
-                    <Dropdown fluid style={{width:'95%',marginLeft:9,marginTop:10}} placeholder='Select User'  selection options={this.props.userDetails} onChange={this.handleDropdownSelection} />
+                    <Dropdown fluid style={{margin:'auto',marginTop:10 , width: '80%'}} placeholder='Select User'  selection options={this.props.userDetails} onChange={this.handleDropdownSelection} />
                 </div>
                 <div>
-                    <Button fluid color='pink' style={{ width:'95%',justifyContent:'center',marginTop:'20px', marginBottom:'20px',marginLeft:9}} onClick={this.handleLogin}>Sign In</Button>
+                    <Button fluid color='pink' style={{ width:'80%',margin:'auto',marginTop:'20px', marginBottom:'20px',}} onClick={this.handleLogin}>Sign In</Button>
                 </div>
             </Card>
             </div>

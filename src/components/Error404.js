@@ -6,7 +6,7 @@ import NotFound from './notfound.png';
 const Error404 = () => {
     return(
         <div>
-            <div className='page-404' style={{textAlign:'center'}}>
+            <div style={{textAlign:'center'}}>
                 <img src={NotFound} style={{height: 400}} alt="kylo ren"/>
                 <h3>
                     Oopsie

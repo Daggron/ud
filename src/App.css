@@ -20,7 +20,7 @@ li:first-child {
   justify-content: center;
 }
 
-.divider {
+.verticle-divider {
   left: 30%;
   border-right: 1px solid #d4d4d5;
   height: 90px;
@@ -156,12 +156,13 @@ li:first-child {
   display: flex;
   flex-direction:row;
 }
-.nav-mobile {
-  display:flex;
-}
 
-.page-404 {
-	padding: 30px 0;
-	margin: 30px 0
+
+.verticle-divider-leaderboard-left {
+  left:25%
+
+}
+.verticle-divider-leaderboard-right {
+  right:25%
 }
 

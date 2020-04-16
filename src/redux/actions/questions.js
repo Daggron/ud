@@ -1,5 +1,6 @@
 import { _saveQuestion, _saveQuestionAnswer } from '../../utils/_DATA';
-import { showLoading, hideLoading } from 'react-redux-loading'
+import { showLoading, hideLoading } from 'react-redux-loading';
+import {receiveUsers as updateUser }  from './users';
 
 export const GetQ = 'GetQ'
 export const AddQ = 'ADDQ'
@@ -35,9 +36,10 @@ export function receiveQuestions(questions) {
         optionOneText,
         optionTwoText,
         author:authedUser
-      }).then((question) =>
+      }).then(({question,users}) =>{
         dispatch(addQuestion(question))
-        ).then(() =>dispatch(hideLoading()))
+        dispatch(updateUser(users))
+        }).then(() =>dispatch(hideLoading()))
     }
   }
 

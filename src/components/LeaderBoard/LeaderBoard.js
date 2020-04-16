@@ -7,7 +7,7 @@ import style from './LeaderBoard.module.css';
 class LeaderBoard extends Component {
     render() {
         const {usersDetails,authedUser} = this.props;
-        if(!authedUser) return <Redirect to="/login" />
+        if(!authedUser) return <Redirect to={{pathname:"/login",state:{from:'/leaderboard'}}} />
 
         return(
             <div className={style.container}>

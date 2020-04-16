@@ -12,7 +12,7 @@ class Home extends Component {
 
         if(!authedUser){
             return(
-                <Redirect to="/login" />
+                <Redirect to={{pathname:'/login',state:{from: '/'}}} />
             )
         }
 

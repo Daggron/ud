@@ -1,23 +1,24 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import NotFound from '../notfound.png';
 import style from './Error.module.css';
 
 const Error404 = () => {
     return(
         <div className={style.errorPage}>
             <div>
-                <img src={NotFound} style={{height: 400}} alt="kylo ren"/>
+                <h1 style={{color:'red',fontSize:100}}>
+                    404
+                </h1>
                 <h3>
                     Oopsie
                 </h3>
                <p className={style.danger}>
-                   You Dared to enter the dark side of the force
+                   The Page you are looking for 
                    <br/>
-                   Kylo ren is there waiting for you
+                   doesn't exists
                </p>
                <p className={style.normal}>
-                   Try go back to <Link to="/">Falcon 1</Link> to be safe
+                   Try go back to <Link to="/">Home</Link>
                </p>
             </div>
         </div>

@@ -38,3 +38,33 @@
     justify-content: space-between;
     
 }
+
+
+@media (max-width:1200px){
+  .container{
+    width: 500px;
+    margin: auto;
+    margin-top:3%;
+  }
+  
+}
+
+@media (max-width:900px){
+  .dividerLeft{
+    left:23%;
+    top:10px;
+    height: 120px;
+    width: 0;
+    position: absolute;
+    border-left:1px solid #d4d4d5;
+  }
+
+  .dividerRight{
+    right: 27%;
+    height: 120px;
+    top:20px;
+    width: 0;
+    position: absolute;
+    border-right: 1px solid #d4d4d5;
+  }
+}

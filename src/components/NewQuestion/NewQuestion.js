@@ -39,7 +39,7 @@ class NewQuestion extends Component {
     render() {
         const {authedUser} = this.props;
         if(!authedUser) return(
-            <Redirect to="/login" />
+            <Redirect to={{pathname:'/login',state:{from: '/add'}}} />
         )
         return(
             <div className={style.form}>

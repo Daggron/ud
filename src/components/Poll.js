@@ -52,7 +52,7 @@ class Poll extends Component {
             if(answer==='optionTwo') {isVotedOptionTwo=true; optTwoColor='pink'}
         }
         const {authedUser} = this.props;
-        if(!authedUser) return <Redirect to="/" />
+        if(!authedUser) return <Redirect to={{pathname:'/login',state:{from:`/questions${question.id}`}}} />
         return(
             <div>
             { hasQuestionNotAnswered ?
